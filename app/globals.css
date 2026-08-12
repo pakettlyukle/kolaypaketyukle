@@ -1,26 +1,241 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  color: #171717;
+  background: #ffffff;
+}
+
+.header {
+  background: #2563eb;
+  color: white;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: white;
+}
+
+.header-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.header-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.header-nav a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb {
+  background: #f9fafb;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.breadcrumb a {
+  color: #6b7280;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: #2563eb;
+}
+
+.hero {
+  background: #eff6ff;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1d4ed8;
+  margin-bottom: 0.75rem;
+}
+
+.hero p {
+  color: #4b5563;
+  font-size: 1.1rem;
+}
+
+.kategoriler {
+  padding: 3rem 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.kategoriler h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.kategori-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .kategori-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.kategori-kart {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s;
+}
+
+.kategori-kart:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.kategori-kart .icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.kategori-kart .ad {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.kategori-kart:hover .ad {
+  color: #2563eb;
+}
+
+.form-kart {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  padding: 2rem;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.form-input {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #3b82f6;
+}
+
+.form-btn {
+  width: 100%;
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+  padding: 0.875rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.form-btn:hover {
+  background: #1d4ed8;
+}
+
+.ozellikler {
+  background: #f9fafb;
+  padding: 3rem 1.5rem;
+}
+
+.ozellik-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .ozellik-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ozellik-kart {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.ozellik-kart .icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.ozellik-kart h3 {
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.ozellik-kart p {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.footer {
+  background: #1f2937;
+  color: #9ca3af;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 3rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.footer-links a {
+  color: #9ca3af;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: white;
 }

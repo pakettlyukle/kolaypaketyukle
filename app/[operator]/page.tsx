@@ -3,11 +3,13 @@ import Link from "next/link";
 
 const operatorData: Record<string, {
   ad: string;
+  renk: string;
   aciklama: string;
   kategoriler: { slug: string; ad: string; icon: string }[];
 }> = {
   turkcell: {
     ad: "Turkcell",
+    renk: "blue",
     aciklama: "Turkcell hatlarına anında paket ve TL yükle.",
     kategoriler: [
       { slug: "internet-paketleri", ad: "İnternet Paketleri", icon: "📶" },
@@ -18,6 +20,7 @@ const operatorData: Record<string, {
   },
   vodafone: {
     ad: "Vodafone",
+    renk: "red",
     aciklama: "Vodafone hatlarına anında paket ve TL yükle.",
     kategoriler: [
       { slug: "internet-paketleri", ad: "İnternet Paketleri", icon: "📶" },
@@ -27,6 +30,7 @@ const operatorData: Record<string, {
   },
   "turk-telekom": {
     ad: "Türk Telekom",
+    renk: "blue",
     aciklama: "Türk Telekom hatlarına anında paket ve TL yükle.",
     kategoriler: [
       { slug: "internet-paketleri", ad: "İnternet Paketleri", icon: "📶" },
@@ -36,6 +40,7 @@ const operatorData: Record<string, {
   },
   bimcell: {
     ad: "BİMcell",
+    renk: "orange",
     aciklama: "BİMcell hatlarına anında paket ve TL yükle.",
     kategoriler: [
       { slug: "internet-paketleri", ad: "İnternet Paketleri", icon: "📶" },
@@ -44,6 +49,7 @@ const operatorData: Record<string, {
   },
   pttcell: {
     ad: "PTTcell",
+    renk: "yellow",
     aciklama: "PTTcell hatlarına anında paket ve TL yükle.",
     kategoriler: [
       { slug: "internet-paketleri", ad: "İnternet Paketleri", icon: "📶" },
@@ -72,59 +78,72 @@ export default async function OperatorPage(
 
   if (!op) {
     return (
-      <main style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ textAlign: "center" }}>
-          <h1>Operatör bulunamadı</h1>
-          <Link href="/">Ana sayfaya dön</Link>
+      <main className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">Operatör bulunamadı</h1>
+          <Link href="/" className="text-blue-600 hover:underline">Ana sayfaya dön</Link>
         </div>
       </main>
     );
   }
 
   return (
-    <main>
-      <header className="header">
-        <Link href="/" className="header-logo">KolayPaketYükle</Link>
-        <nav className="header-nav">
-          {Object.keys(operatorData).map((key) => (
-            <Link key={key} href={`/${key}`}>{operatorData[key].ad}</Link>
+    <main className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="bg-blue-600 text-white py-4 px-6 flex items-center justify-between">
+        <Link href="/" className="text-2xl font-bold">KolayPaketYükle</Link>
+        <nav className="hidden md:flex gap-6 text-sm">
+          {Object.keys(operatorData).map((op) => (
+            <Link key={op} href={`/${op}`} className="hover:underline capitalize">
+              {operatorData[op].ad}
+            </Link>
           ))}
         </nav>
       </header>
 
-      <div className="breadcrumb">
-        <Link href="/">Ana Sayfa</Link>
-        <span> › </span>
-        <span>{op.ad}</span>
+      {/* Breadcrumb */}
+      <div className="bg-gray-50 px-6 py-3 text-sm text-gray-500">
+        <Link href="/" className="hover:text-blue-600">Ana Sayfa</Link>
+        <span className="mx-2">›</span>
+        <span className="text-gray-800 font-medium">{op.ad}</span>
       </div>
 
-      <section className="hero">
-        <h1>{op.ad} Paket Yükleme</h1>
-        <p>{op.aciklama}</p>
+      {/* Hero */}
+      <section className="bg-blue-50 py-12 px-6 text-center">
+        <h1 className="text-3xl font-bold text-blue-700 mb-3">
+          {op.ad} Paket Yükleme
+        </h1>
+        <p className="text-gray-600 text-lg">{op.aciklama}</p>
       </section>
 
-      <section className="kategoriler">
-        <h2>{op.ad} Kategorileri</h2>
-        <div className="kategori-grid">
+      {/* Kategoriler */}
+      <section className="py-12 px-6 max-w-4xl mx-auto">
+        <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">
+          {op.ad} Kategorileri
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {op.kategoriler.map((kat) => (
             <Link
               key={kat.slug}
               href={`/${operator}/${kat.slug}`}
-              className="kategori-kart"
+              className="bg-white border border-gray-200 rounded-xl p-6 text-center hover:border-blue-400 hover:shadow-md transition group"
             >
-              <div className="icon">{kat.icon}</div>
-              <div className="ad">{kat.ad}</div>
+              <div className="text-4xl mb-3">{kat.icon}</div>
+              <div className="font-semibold text-gray-700 group-hover:text-blue-600 transition text-sm">
+                {kat.ad}
+              </div>
             </Link>
           ))}
         </div>
       </section>
 
-      <footer className="footer">
+      {/* Footer */}
+      <footer className="bg-gray-800 text-gray-400 py-8 px-6 text-center text-sm mt-12">
         <p>© 2026 KolayPaketYükle. Tüm hakları saklıdır.</p>
-        <div className="footer-links">
-          <Link href="/kvkk">KVKK</Link>
-          <Link href="/gizlilik">Gizlilik</Link>
-          <Link href="/iletisim">İletişim</Link>
+        <div className="flex justify-center gap-4 mt-3">
+          <Link href="/kvkk" className="hover:text-white">KVKK</Link>
+          <Link href="/gizlilik" className="hover:text-white">Gizlilik</Link>
+          <Link href="/iletisim" className="hover:text-white">İletişim</Link>
         </div>
       </footer>
     </main>
